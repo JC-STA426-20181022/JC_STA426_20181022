@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Journal Club</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Deepak Tanwar" />
+    <link href="JC_DeepakTanwar_files/remark-css/default.css" rel="stylesheet" />
+    <link href="JC_DeepakTanwar_files/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="JC_DeepakTanwar_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="JC_DeepakTanwar_files/jquery/jquery.min.js"></script>
+    <link href="JC_DeepakTanwar_files/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="JC_DeepakTanwar_files/datatables-binding/datatables.js"></script>
+    <link href="JC_DeepakTanwar_files/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="JC_DeepakTanwar_files/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="JC_DeepakTanwar_files/dt-core/js/jquery.dataTables.min.js"></script>
+    <script src="JC_DeepakTanwar_files/jszip/jszip.min.js"></script>
+    <script src="JC_DeepakTanwar_files/pdfmake/pdfmake.min.js"></script>
+    <script src="JC_DeepakTanwar_files/pdfmake/vfs_fonts.js"></script>
+    <link href="JC_DeepakTanwar_files/dt-ext-buttons/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="JC_DeepakTanwar_files/dt-ext-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="JC_DeepakTanwar_files/dt-ext-buttons/js/buttons.flash.min.js"></script>
+    <script src="JC_DeepakTanwar_files/dt-ext-buttons/js/buttons.html5.min.js"></script>
+    <script src="JC_DeepakTanwar_files/dt-ext-buttons/js/buttons.colVis.min.js"></script>
+    <script src="JC_DeepakTanwar_files/dt-ext-buttons/js/buttons.print.min.js"></script>
+    <link href="JC_DeepakTanwar_files/dt-ext-colreorder/css/colReorder.dataTables.min.css" rel="stylesheet" />
+    <script src="JC_DeepakTanwar_files/dt-ext-colreorder/js/dataTables.colReorder.min.js"></script>
+    <link href="JC_DeepakTanwar_files/nouislider/jquery.nouislider.min.css" rel="stylesheet" />
+    <script src="JC_DeepakTanwar_files/nouislider/jquery.nouislider.min.js"></script>
+    <link href="JC_DeepakTanwar_files/selectize/selectize.bootstrap3.css" rel="stylesheet" />
+    <script src="JC_DeepakTanwar_files/selectize/selectize.min.js"></script>
+    <link href="JC_DeepakTanwar_files/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="JC_DeepakTanwar_files/crosstalk/js/crosstalk.min.js"></script>
+    <link rel="stylesheet" href="new.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Journal Club
+### Deepak Tanwar
+### 12 <sup>th</sup> October, 2018
+
+---
+
+
+
+
+
+
+# Table of Contents
+
+.large[
+[dmrseq paper](#3)
+&lt;br&gt;
+&lt;br&gt;
+[Applications of WGBS](#4)
+&lt;br&gt;
+&lt;br&gt;
+[Methods limitation](#5)
+&lt;br&gt;
+&lt;br&gt;
+[dmrseq](#8)
+&lt;br&gt;
+&lt;br&gt;
+[Venn diagrams](#15)
+]
+---
+
+class: left
+
+&lt;br&gt;
+&lt;br&gt;
+
+# Detection and accurate false discovery rate control of differentially methylated regions from whole genome bisulfite sequencing
+
+.blue[Keegan Korthauer, Sutirtha Chakraborty, Yuval Benjamini,] .red[Rafael A Irizarry]
+
+
+&lt;i&gt;Biostatistics&lt;/i&gt;, kxy007, https://doi.org/10.1093/biostatistics/kxy007
+
+&lt;b&gt;Published:&lt;/b&gt; 22 February 2018
+
+
+---
+
+class: left
+
+# .center[Applications of WGBS]
+
+&lt;br&gt;
+
+- Detection of DMRs
+
+- Detection of DMLs
+
+- Detection of CNVs
+
+- Detection of SNPs
+
+- Detection of Cytosine methylation levels of TFBSs
+
+---
+
+class: left
+
+# .center[Limitations of current methods]
+
+- Methods are greatly hindered by low sample size. Most of the methods depends on large sample sizes.
+
+--
+
+- The number of tests performed = the number of loci analyzed.
+&lt;b&gt;Example:&lt;/b&gt; Human genome have ~30 million CpGs [1].
+
+--
+
+- Measurements are spatially correlated across the genome [2] (which is not accounted in most of the methods). Measurements from all loci are treated independently.
+
+--
+
+- Muliple testing corrections without considering the spatial correlation can result in a loss of power.
+
+--
+
+- &lt;b&gt;Biological interpretability:&lt;/b&gt; most individual CpG loci likely do not have a large impact on epigenetic function on their own, but rather through a biochemical modification that involves several loci. Regional DNA methylation levels are correlated with the expression levels of nearby genes. Differentially expressed genes were consistently more likely to be located near DMRs than DMLs [3].
+
+---
+
+##.right[....cont.]
+
+- DML approaches may construct DMRs by chaining together neighboring significant loci, this type of approach will not yield a proper assessment of the statistical significance of the constructed regions, nor will the FDR be properly controlled [4]. Controlling the FDR at the level of individual loci is not the same as controlling FDR of regions.
+
+--
+
+- FDR correction at the level of individual loci means that the proportion of expected false positive (FP) loci is controlled, not the proportion of FP regions. Statistically, this is a critical point since FDR control of DMR detection is not guaranteed under the DML setting.
+
+--
+
+- To perform inference at the region level, many tools: perform analysis on predefined regions of interest or fixed sliding windows. Though useful in targeted settings such as reduced representation bisulfite sequencing (RRBS), or when we have prior knowledge of the DMR size, they are not applicable to identifying DMRs of arbitrary size from WGBS.
+
+--
+
+- Challenges for assessing DMRs:
+   - Region boundaries
+   - methods ignore correlation across loci
+   - biological variability from sample to sample
+
+---
+
+# .center[Methods implementation challenges]
+
+.full-width[.content-box-green[
+Methods for identifying DMLs also need to properly account for the statistical properties of count data that do not conform to standard &lt;b&gt;Gaussian models&lt;/b&gt;. This is in contrast to methylation array analysis, where Gaussian models performed well (Jaffe and others, 2012). One option is to assume that methylation proportions, defined as the number of methylated reads divided by the number of total reads covering a given CpG locus, follow a normal distribution (Hansen and others, 2012). However this assumption clearly does not hold when the total reads covering the CpG, referred to as the coverage, is small, a common occurrence in these data sets. The approach also ignores that variance of this proportion depends on the coverage. To overcome these limitations, DML approaches have also modeled WGBS count data using &lt;b&gt;Binomial models&lt;/b&gt; (Saito and others, 2014). However, Binomial models on their own cannot account for biological variability within sample groups. In order to account for biological variability in count data, &lt;b&gt;Beta-Binomial models&lt;/b&gt; (Park and others, 2014; Sun and others, 2014) are a natural extension. However, they come at the cost of increased computational burden when testing millions of loci.
+]]
+
+
+---
+
+
+# .center[dmrseq] .right[&lt;img src="https://raw.githubusercontent.com/kdkorthauer/dmrseq/master/inst/sticker/dmrseq.png" width="100" height="100%"&gt;] 
+
+.large[.full-width[.content-box-red[&lt;b&gt;Aim:&lt;/b&gt; 
+
+1. To &lt;b&gt;maximize power&lt;/b&gt; while &lt;b&gt;controlling the FDR&lt;/b&gt; even with sample sizes as small as &lt;b&gt;two samples per condition&lt;/b&gt;.
+
+
+2. To develop a procedure to control FDR at the region level and provide an accurate measure of statistical significance for each region.
+
+]]]
+---
+
+# .center[FDR at the loci level is not the same as FDR at the region level]
+
+.pull-left[
+&lt;img src="pics/01_dmr.png" width="1000" height="130%"&gt;
+
+.content-box-blue[
+&lt;b&gt;Genomic location versus methylation difference estimates at several neighboring loci.&lt;/b&gt;
+]
+]
+
+
+.pull-right[
+.content-box-blue[
+The individual CpGs (points) are shaded by whether they are a true or false positive. Regions are denoted by lines. 
+
+&lt;b&gt;The loci FDR is:&lt;/b&gt;
+
+ .red[FDRloci = (#False Positive Loci) / (Total # of Significant Loci)]
+ 
+&lt;b&gt;The region FDR is:&lt;/b&gt;
+
+.red[FDRregion=(#False Positive Regions) / (Total # of Significant Regions)]
+]
+]
+
+---
+
+
+# .center[Identification of DMRs by dmrseq]
+
+1. &lt;b&gt;de novo candidate regions:&lt;/b&gt; detects candidate regions and then explicitly evaluates statistical significance at the region level while accounting for known sources of variability
+
+--
+
+2. compute a statistic for each candidate DMR that takes into account variability between biological replicates and spatial correlation among neighboring loci. Significance of each region is assessed via a permutation procedure.
+
+- Estimation of region statistics with generalized least squares models
+
+- Covariance of methylation levels within regions
+
+- Permutation to generate a null set of regions
+
+
+---
+
+# .center[dmrseq performs better]
+
+.center[
+&lt;img src="pics/02_dmr.png" width="500" height="50%"&gt;
+]
+
+
+---
+
+# .center[dmrseq is more powerful than other methods]
+
+.center[
+&lt;img src="pics/03_dmr.png" width="1000" height="100%"&gt;
+]
+
+.footnotesize[.blue[Power is calculated as the proportion of simulated DMRs overlapped by at least one identified DMR. FDR is calculated as the proportion of DMRs identified that do not overlap with any of the simulated DMRs.]]
+---
+
+
+
+
+class: left
+
+# Summary
+
+
+- Implementation in the case of 2 samples per group.
+
+--
+
+- Consideration of all possible shorcomings of the available methods for DMRs detection.
+
+--
+
+- Evaluation of the software using experimental data and Monte Carlo simulations.
+
+--
+
+- Implementation in &lt;b&gt;R&lt;/b&gt;.
+
+--
+
+- Comparion of their method with the "famous" methods.
+
+--
+
+- Comparison is not done with &lt;b&gt;RnBeads&lt;/b&gt;. Probably because RnBeads performs differential methylation analysis (only) at single nucleotide level.
+
+
+- Comparison is not done with &lt;b&gt;methylKit&lt;/b&gt;. Although methylKit performs differential methylation analysis at regional level.
+
+---
+
+# References
+
+[1] Smith Z. D. and Meissner A. (2013). DNA methylation: roles in mammalian development. Nature Reviews Genetics  14, 204–220.
+
+[2] Leek J. T., Scharpf R. B., Bravo H. C., Simcha D., Langmead B., Johnson W. E., Geman D., Baggerly K. and Irizarry R. A. (2010). Tackling the widespread and critical impact of batch effects in high-throughput data. Nature Reviews Genetics  11, 733–739.
+
+[3] Aryee M. J., Jaffe A. E., Corrada-Bravo H., Ladd-Acosta C., Feinberg A. P., Hansen K. D. and Irizarry R. A. (2014). Minfi: a flexible and comprehensive Bioconductor package for the analysis of infinium DNA methylation microarrays. Bioinformatics  30, 1363–1369.
+
+[4] Robinson M. D., Kahraman A., Law C. W., Lindsay H., Nowicka M., Weber L. M. and Zhou X. (2014). Statistical methods for detecting differentially methylated loci and regions. Frontiers in Genetics  5, 324.
+
+
+---
+# Venn diagrams: .blue[Good] or .red[Bad]
+
+
+
+<div id="htmlwidget-ba75e1b9339ab6606f47" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ba75e1b9339ab6606f47">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"factor\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"width: 100%; display: none;\">\n      <select multiple=\"multiple\" style=\"width: 100%;\" data-options=\"[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;,&quot;g&quot;,&quot;h&quot;,&quot;i&quot;,&quot;j&quot;,&quot;k&quot;,&quot;l&quot;,&quot;m&quot;,&quot;n&quot;,&quot;o&quot;,&quot;p&quot;,&quot;q&quot;,&quot;r&quot;,&quot;s&quot;,&quot;t&quot;,&quot;u&quot;,&quot;v&quot;,&quot;w&quot;,&quot;x&quot;,&quot;y&quot;,&quot;z&quot;]\"><\/select>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"0\" data-max=\"1\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons","ColReorder"],"data":[["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],[1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0],[0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0],[0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Genes<\/th>\n      <th>Liver<\/th>\n      <th>Brain<\/th>\n      <th>Testis<\/th>\n      <th>Sperm<\/th>\n      <th>Stomach<\/th>\n      <th>Kidney<\/th>\n      <th>Lungs<\/th>\n      <th>Intestine<\/th>\n      <th>Heart<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":3,"buttons":["copy","csv","excel","pdf","print"],"colReorder":{"realtime":false},"dom":"fltBip","columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,7,8,9]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[3,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+
+```
+##   Genes Liver Brain Testis Sperm Stomach Kidney Lungs Intestine Heart
+## 1     a     1     0      0     0       0      0     0         1     0
+## 2     b     1     0      0     0       0      0     0         1     0
+## 3     c     1     0      0     0       1      0     0         1     1
+## 4     d     1     0      0     0       1      0     1         1     1
+## 5     e     1     1      0     0       1      0     1         1     1
+## 6     f     1     1      0     0       1      0     1         1     1
+```
+
+---
+
+# Venn and Euler
+
+## Two Groups
+
+.pull-left[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-3-1.png" width="672" /&gt;
+]
+
+--
+
+.pull-right[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-4-1.png" width="672" /&gt;
+]
+
+---
+
+## Three Groups
+
+&lt;br&gt;
+
+.pull-left[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-5-1.png" width="672" /&gt;
+]
+
+--
+
+.pull-right[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-6-1.png" width="672" /&gt;
+]
+
+---
+## Four Groups
+
+&lt;br&gt;
+
+.pull-left[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-7-1.png" width="672" /&gt;
+]
+
+--
+
+.pull-right[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-8-1.png" width="672" /&gt;
+]
+
+---
+
+## Five groups
+
+&lt;br&gt;
+
+.pull-left[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-9-1.png" width="672" /&gt;
+]
+
+--
+
+.pull-right[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-10-1.png" width="672" /&gt;
+]
+
+---
+
+## Nine groups
+
+.pull-left[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-11-1.png" width="672" /&gt;
+]
+
+--
+
+.pull-right[
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-12-1.png" width="672" /&gt;
+]
+
+---
+
+class: center
+# A better way
+
+
+&lt;img src="pics/04_dmr.png" width="300" height="30%"&gt;
+
+
+---
+class: center
+
+# UpSet plots
+
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-13-1.png" width="672" /&gt;
+
+
+
+---
+
+class: center
+# UpSet plot (no empty)
+
+&lt;img src="JC_DeepakTanwar_files/figure-html/unnamed-chunk-14-1.png" width="672" /&gt;
+
+---
+
+class: center
+
+# Sets and intersection
+&lt;br&gt;
+
+
+&lt;img src="pics/05_dmr.png" width="700" height="70%"&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+
+
+https://intervene.shinyapps.io/intervene/
+---
+
+class: center
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+.eLarge[.red[**Thank you!**]]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();
+(function(time) {
+  var d2 = function(number) {
+    return ('0' + number).slice(-2); // left-pad 0 to minutes/seconds
+  },
+
+  time_format = function(total) {
+    var secs = Math.abs(total) / 1000;
+    var h = Math.floor(secs / 3600);
+    var m = Math.floor(secs % 3600 / 60);
+    var s = Math.round(secs % 60);
+    var res = d2(m) + ':' + d2(s);
+    if (h > 0) res = h + ':' + res;
+    return res;  // [hh:]mm:ss
+  },
+
+  slide_number_div = function(i) {
+    return document.getElementsByClassName('remark-slide-number').item(i);
+  },
+
+  current_page_number = function(i) {
+    return slide_number_div(i).firstChild.textContent;  // text "i / N"
+  };
+
+  var timer = document.createElement('span'); timer.id = 'slide-time-left';
+  var time_left = time, k = slideshow.getCurrentSlideIndex(),
+      last_page_number = current_page_number(k);
+
+  setInterval(function() {
+    time_left = time_left - 1000;
+    timer.innerHTML = ' ' + time_format(time_left);
+    if (time_left < 0) timer.style.color = 'red';
+  }, 1000);
+
+  slide_number_div(k).appendChild(timer);
+
+  slideshow.on('showSlide', function(slide) {
+    var i = slide.getSlideIndex(), n = current_page_number(i);
+    // reset timer when a new slide is shown and the page number is changed
+    if (last_page_number !== n) {
+      time_left = time; last_page_number = n;
+      timer.innerHTML = ' ' + time_format(time); timer.style.color = null;
+    }
+    slide_number_div(i).appendChild(timer);
+  });
+})(120000);</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
