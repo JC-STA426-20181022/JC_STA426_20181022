@@ -1,7 +1,7 @@
 ---
 title: "Journal Club"
-author: "Deepak Tanwar"
-date: "12 <sup>th</sup> October, 2018"
+author: "Deepak Tanwar, Hana Parizkova"
+date: "22 <sup>th</sup> October, 2018"
 output: 
   xaringan::moon_reader:
     libs: libs
@@ -76,16 +76,16 @@ class: left
 
 # .center[Limitations of current methods]
 
-- Methods are greatly hindered by low sample size. Most of the methods depends on large sample sizes.
+- Methods are greatly hindered by low sample size. Most of the methods depend on large sample sizes.
 
 --
 
 - The number of tests performed = the number of loci analyzed.
-<b>Example:</b> Human genome have ~30 million CpGs [1].
+<b>Example:</b> Human genome has ~30 million CpGs [1].
 
 --
 
-- Measurements are spatially correlated across the genome [2] (which is not accounted in most of the methods). Measurements from all loci are treated independently.
+- Measurements are spatially correlated across the genome [2], but in most methods measurements from all loci are treated independently.
 
 --
 
@@ -93,51 +93,24 @@ class: left
 
 --
 
-- <b>Biological interpretability:</b> most individual CpG loci likely do not have a large impact on epigenetic function on their own, but rather through a biochemical modification that involves several loci. Regional DNA methylation levels are correlated with the expression levels of nearby genes. Differentially expressed genes were consistently more likely to be located near DMRs than DMLs [3].
-
+- DMRs more biologically relevant than DMLs.
 ---
 
 ##.right[....cont.]
 
-- DML approaches may construct DMRs by chaining together neighboring significant loci, this type of approach will not yield a proper assessment of the statistical significance of the constructed regions, nor will the FDR be properly controlled [4]. Controlling the FDR at the level of individual loci is not the same as controlling FDR of regions.
+- DML approaches may construct DMRs by chaining together neighboring significant loci, but this type of approach will not yield a proper assessment of the statistical significance of the constructed regions, nor will the FDR be properly controlled [4]. Controlling the FDR at the level of individual loci is not the same as controlling FDR of regions.
 
 --
 
-- FDR correction at the level of individual loci means that the proportion of expected false positive (FP) loci is controlled, not the proportion of FP regions. Statistically, this is a critical point since FDR control of DMR detection is not guaranteed under the DML setting.
-
---
-
-- To perform inference at the region level, many tools: perform analysis on predefined regions of interest or fixed sliding windows. Though useful in targeted settings such as reduced representation bisulfite sequencing (RRBS), or when we have prior knowledge of the DMR size, they are not applicable to identifying DMRs of arbitrary size from WGBS.
+- Methylation data cannot be modeled neither by Gaussian models (due to low coverage), nor by Binomial models (do not account for biological variability). Beta-Binomial models are computationaly difficult.
 
 --
 
 - Challenges for assessing DMRs:
-   - Region boundaries
+   - defining region boundaries
    - methods ignore correlation across loci
    - biological variability from sample to sample
 
----
-
-# .center[Methods implementation challenges]
-
-.full-width[.content-box-green[
-Methods for identifying DMLs also need to properly account for the statistical properties of count data that do not conform to standard <b>Gaussian models</b>. This is in contrast to methylation array analysis, where Gaussian models performed well (Jaffe and others, 2012). One option is to assume that methylation proportions, defined as the number of methylated reads divided by the number of total reads covering a given CpG locus, follow a normal distribution (Hansen and others, 2012). However this assumption clearly does not hold when the total reads covering the CpG, referred to as the coverage, is small, a common occurrence in these data sets. The approach also ignores that variance of this proportion depends on the coverage. To overcome these limitations, DML approaches have also modeled WGBS count data using <b>Binomial models</b> (Saito and others, 2014). However, Binomial models on their own cannot account for biological variability within sample groups. In order to account for biological variability in count data, <b>Beta-Binomial models</b> (Park and others, 2014; Sun and others, 2014) are a natural extension. However, they come at the cost of increased computational burden when testing millions of loci.
-]]
-
-
----
-
-
-# .center[dmrseq] .right[<img src="https://raw.githubusercontent.com/kdkorthauer/dmrseq/master/inst/sticker/dmrseq.png" width="100" height="100%">] 
-
-.large[.full-width[.content-box-red[<b>Aim:</b> 
-
-1. To <b>maximize power</b> while <b>controlling the FDR</b> even with sample sizes as small as <b>two samples per condition</b>.
-
-
-2. To develop a procedure to control FDR at the region level and provide an accurate measure of statistical significance for each region.
-
-]]]
 ---
 
 # .center[FDR at the loci level is not the same as FDR at the region level]
@@ -168,19 +141,209 @@ The individual CpGs (points) are shaded by whether they are a true or false posi
 ---
 
 
+# .center[dmrseq] .right[<img src="https://raw.githubusercontent.com/kdkorthauer/dmrseq/master/inst/sticker/dmrseq.png" width="100" height="100%">] 
+
+.large[.full-width[.content-box-red[<b>Aim:</b> 
+
+1. To <b>maximize power</b> while <b>controlling the FDR</b> even with sample sizes as small as <b>two samples per condition</b>.
+
+
+2. To develop a procedure to control FDR at the region level and provide an accurate measure of statistical significance for each region.
+
+]]]
+
+---
+
 # .center[Identification of DMRs by dmrseq]
 
-1. <b>de novo candidate regions:</b> detects candidate regions and then explicitly evaluates statistical significance at the region level while accounting for known sources of variability
+```{r, echo=F, message=F}
+library(DiagrammeR)
 
---
+grViz("
+digraph flowchart {
+graph [overlap = true, layout=dot,fontsize=12]
+node [shape = box,
+  style=filled,
+  fillcolor=AliceBlue,
+  color=lightBlue2,
+  fontsize=12]
+ A [label='Detect candidate regions']
+B [label='Assessing significance \n of each candidate DMR']
+C [label='Estimate FDR']
 
-2. compute a statistic for each candidate DMR that takes into account variability between biological replicates and spatial correlation among neighboring loci. Significance of each region is assessed via a permutation procedure.
+edge[color=lightBlue2,
+  penwidth=5
+]
+A->B B->C}
+")
+```
 
-- Estimation of region statistics with generalized least squares models
+---
 
-- Covariance of methylation levels within regions
+# .center[Detecting candidate regions]
 
-- Permutation to generate a null set of regions
+.pull-left[
+```{r, echo=F, message=F, figure=TRUE, fig.align="left", fig.width=3.5}
+grViz("
+digraph flowchart {
+graph [overlap = true, layout=dot,fontsize=12]
+node [shape = box,
+  style=filled,
+  fillcolor=AliceBlue,
+  color=lightBlue2,
+  fontsize=12]
+ A [label='Detect candidate regions',
+  fillcolor=lightBlue2]
+B [label='Assessing significance \n of each candidate DMR']
+C [label='Estimate FDR']
+
+edge[color=lightBlue2,
+  penwidth=5
+]
+A->B B->C}
+")
+```
+]
+
+
+.pull-right[
+- mean methylation proportion for locus $i$ in condition $s$: $$\pi_{is} = M_{is}/N_{is}$$
+
+
+- methylation difference of locus $i$ between regions $s$ and $s'$: $$\beta_i = \pi_{is} - \pi_{is'}$$ 
+
+
+- $\beta_i$'s are smoothed
+
+
+- candidate regions: segments of genomes with smoothed $\beta_i$'s in the same direction and in absolute value greater than a threshold (e.g. 0.1)
+]
+
+
+
+--- 
+
+---
+
+# .center[Assessing significance of candidate DMRs]
+
+.pull-left[
+```{r, echo=F, message=F, figure=TRUE, fig.align="left", fig.width=3.5}
+grViz("
+digraph flowchart {
+graph [overlap = true, layout=dot,fontsize=12]
+node [shape = box,
+  style=filled,
+  fillcolor=AliceBlue,
+  color=lightBlue2,
+  fontsize=12]
+ A [label='Detect candidate regions']
+B [label='Assessing significance \n of each candidate DMR',
+  fillcolor=lightBlue2]
+C [label='Estimate FDR']
+
+edge[color=lightBlue2,
+  penwidth=5
+]
+A->B B->C}
+")
+```
+]
+
+.pull-right[
+- methylation counts modeled by Beta-Binomial distribution
+
+- to stabilize the dependence of variance on mean, data are transformed: $$Z_{ijr} =\arcsin{(2M_{ijr}/N_{ijr}-1)}$$
+
+- mean region methylation level can be then estimated using Generalized Least Squares: $$Z_r = X\beta_{0r} + \beta_{1r},$$
+with $\beta_{1r}$ being the effect of biological group
+
+]
+
+
+---
+
+# .center[Assessing significance of candidate DMRs]
+
+.pull-left[
+```{r, echo=F, message=F, figure=TRUE, fig.align="left", fig.width=3.5}
+grViz("
+digraph flowchart {
+graph [overlap = true, layout=dot,fontsize=12]
+node [shape = box,
+  style=filled,
+  fillcolor=AliceBlue,
+  color=lightBlue2,
+  fontsize=12]
+ A [label='Detect candidate regions']
+B [label='Assessing significance \n of each candidate DMR',
+  fillcolor=lightBlue2]
+C [label='Estimate FDR']
+
+edge[color=lightBlue2,
+  penwidth=5
+]
+A->B B->C}
+")
+```
+]
+
+.pull-right[
+- Estimation of covariance matrix $V_r$:
+
+  - variance dependent on coverage $\rightarrow Var(Z_{ijr}) \approx \sigma^2_r/N_{ijr}$
+  
+  - correlation of nearby loci $\rightarrow$ modeled correlation by coefficients dependent of the lenght of the interval between the two loci
+
+]
+
+
+---
+
+# .center[Estimating FDR]
+
+.pull-left[
+```{r, echo=F, message=F, figure=TRUE, fig.align="left", fig.width=3.5}
+grViz("
+digraph flowchart {
+graph [overlap = true, layout=dot,fontsize=12]
+node [shape = box,
+  style=filled,
+  fillcolor=AliceBlue,
+  color=lightBlue2,
+  fontsize=12]
+ A [label='Detect candidate regions']
+B [label='Assessing significance \n of each candidate DMR']
+C [label='Estimate FDR', fillcolor=lightBlue2]
+
+edge[color=lightBlue2,
+  penwidth=5
+]
+A->B B->C}
+")
+```
+]
+
+.pull-right[
+- permutation to get an approximate null distribution
+
+- p-value computed by comparing the observed test statistics to the null distribution
+
+]
+
+
+---
+
+# .center[Data used for comparison]
+
+
+- six samples of normal human dendritic cells, partitioned into groups of two or three $\rightarrow$ no DMRs
+
+
+- 3000 simulated DMRs added to each data set
+ 
+
+- methylation data from several human tissues and from two mouse strains
 
 
 ---
@@ -211,7 +374,7 @@ class: left
 # Summary
 
 
-- Implementation in the case of 2 samples per group.
+- Powerful even in the case of 2 samples per group.
 
 --
 
@@ -227,14 +390,14 @@ class: left
 
 --
 
-- Comparion of their method with the "famous" methods.
+- Comparison of the new method with the "famous" methods.
 
 --
 
 - Comparison is not done with <b>RnBeads</b>. Probably because RnBeads performs differential methylation analysis (only) at single nucleotide level.
 
 
-- Comparison is not done with <b>methylKit</b>. Although methylKit performs differential methylation analysis at regional level.
+- Comparison is not done with <b>methylKit</b>, although methylKit performs differential methylation analysis at regional level.
 
 ---
 
@@ -249,209 +412,14 @@ class: left
 [4] Robinson M. D., Kahraman A., Law C. W., Lindsay H., Nowicka M., Weber L. M. and Zhou X. (2014). Statistical methods for detecting differentially methylated loci and regions. Frontiers in Genetics  5, 324.
 
 
----
-# Venn diagrams: .blue[Good] or .red[Bad]
-
-```{r, echo = F, message=F}
-library(Vennerable)
-data <- list(Liver = letters[1:12], 
-                   Brain = letters[5:22], 
-                   Testis = letters[14:25],
-                   Sperm = letters[7:26],
-                   Stomach = letters[3:15],
-                   Kidney = letters[8:26],
-             Lungs = letters[4:26],
-             Intestine = letters[1:21],
-             Heart = letters[3:15])
-
-d <- data.frame(Genes = unique(as.character(unlist(data))),
-            Liver = 0, 
-                   Brain = 0, 
-                   Testis = 0,
-                   Sperm = 0,
-                   Stomach = 0,
-                   Kidney = 0,
-             Lungs = 0,
-             Intestine = 0,
-             Heart = 0)
-
-d[which(d$Genes %in% data$Liver),]$Liver <- 1
-d[which(d$Genes %in% data$Brain),]$Brain <- 1
-d[which(d$Genes %in% data$Testis),]$Testis <- 1
-d[which(d$Genes %in% data$Sperm),]$Sperm <- 1
-d[which(d$Genes %in% data$Stomach),]$Stomach <- 1
-d[which(d$Genes %in% data$Kidney),]$Kidney <- 1
-d[which(d$Genes %in% data$Lungs),]$Lungs <- 1
-d[which(d$Genes %in% data$Intestine),]$Intestine <- 1
-d[which(d$Genes %in% data$Heart),]$Heart <- 1
-
-```
-
-```{r, echo=F}
-library(DT)
-datatable(
-  d,
-  rownames = F,
-  filter = "top", extensions = c("Buttons", "ColReorder"), options = list(
-    pageLength = 3,
-    buttons = c("copy", "csv", "excel", "pdf", "print"),
-    colReorder = list(realtime = FALSE),
-    dom = "fltBip"
-  )
-)
-
-head(d)
-```
-
----
-
-# Venn and Euler
-
-## Two Groups
-
-.pull-left[
-```{r, echo = F, message=F}
-plot(Venn(data[c(1,4)]), doWeights = F)
-```
-]
-
---
-
-.pull-right[
-```{r, echo = F, message=F}
-plot(Venn(data[c(1,4)]), doWeights = T)
-```
-]
-
----
-
-## Three Groups
-
-<br>
-
-.pull-left[
-```{r, echo = F, message=F}
-plot(Venn(data[c(1,2,6)]), doWeights = F)
-```
-]
-
---
-
-.pull-right[
-```{r, echo = F, message=F}
-plot(Venn(data[c(1,2,6)]), doWeights = T)
-```
-]
-
----
-## Four Groups
-
-<br>
-
-.pull-left[
-```{r, echo = F, message=F}
-plot(Venn(data[c(1,2,3,6)]), doWeights = F, type = "ellipses")
-```
-]
-
---
-
-.pull-right[
-```{r, echo = F, message=F}
-plot(Venn(data[c(1,2,3,6)]), doWeights = F, type = "squares")
-```
-]
-
----
-
-## Five groups
-
-<br>
-
-.pull-left[
-```{r, echo = F, message=FALSE}
-plot(Venn(data[c(1:5)]), doWeights = F, type = "AWFE")
-```
-]
-
---
-
-.pull-right[
-```{r, echo = F, message=FALSE}
-plot(Venn(data[c(1:5)]), doWeights = F, type = "battle")
-```
-]
-
----
-
-## Nine groups
-
-.pull-left[
-```{r, echo = F, message=FALSE}
-plot(Venn(data[c(1:9)]), doWeights = F, type = "AWFE")
-```
-]
-
---
-
-.pull-right[
-```{r, echo = F, message=FALSE}
-plot(Venn(data[c(1:9)]), doWeights = F, type = "battle")
-```
-]
-
----
-
-class: center
-# A better way
-
-
-<img src="pics/04_dmr.png" width="300" height="30%">
-
-
----
-class: center
-
-# UpSet plots
-
-```{r, echo = F, message=F}
-library(UpSetR)
-upset(d, sets.bar.color = "#56B4E9", empty.intersections = "on", order.by = "freq")
-```
-
-
-
----
-
-class: center
-# UpSet plot (no empty)
-
-```{r, echo = F, message=F}
-upset(d, sets.bar.color = "#56B4E9", order.by = "freq")
-```
 
 ---
 
 class: center
 
-# Sets and intersection
-<br>
-
-
-<img src="pics/05_dmr.png" width="700" height="70%">
-
-<br>
-<br>
-
-
-https://intervene.shinyapps.io/intervene/
----
-
-class: center
-
 <br>
 <br>
 <br>
 <br>
 
-.eLarge[.red[**Thank you!**]]
+.eLarge[**Thank you!**]
