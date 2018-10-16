@@ -337,18 +337,38 @@ A->B B->C}
 # .center[Data used for comparison]
 
 
-- six samples of normal human dendritic cells, partitioned into groups of two or three $\rightarrow$ no DMRs
+- six samples of normal human dendritic cells, partitioned into groups of two or three $\rightarrow$ no DMRs, <b>negative control</b>
+
+--
 
 
-- 3000 simulated DMRs added to each data set
+- <b>simulated data:</b> 3000 simulated DMRs added to each data set
+
+  - DMR is created by choosing a cluster of CpGs and simulating the number of methylated reads from a binomial distribution
+  - binomial probabilities equal to the observed methylation proportions $\pm$ effect size (approx. 0.1 to 0.5)
  
+--
 
-- methylation data from several human tissues and from two mouse strains
+- <b>real data:</b> methylation data from several human tissues and from two mouse strains
 
 
 ---
 
+# .center[dmrseq is more powerful than other methods]
+
+.center[power vs. FDR on simulated data]
+
+.center[
+<img src="pics/03_dmr.png" width="800" height="100%">
+]
+
+.footnotesize[.blue[Power is calculated as the proportion of simulated DMRs overlapped by at least one identified DMR. 
+FDR is calculated as the proportion of DMRs identified that do not overlap with any of the simulated DMRs.]]
+---
+
 # .center[dmrseq performs better]
+
+.center[Examples of real biological data and their ranking by different DMRs identification methods.]
 
 .center[
 <img src="pics/02_dmr.png" width="500" height="50%">
@@ -356,17 +376,6 @@ A->B B->C}
 
 
 ---
-
-# .center[dmrseq is more powerful than other methods]
-
-.center[
-<img src="pics/03_dmr.png" width="1000" height="100%">
-]
-
-.footnotesize[.blue[Power is calculated as the proportion of simulated DMRs overlapped by at least one identified DMR. FDR is calculated as the proportion of DMRs identified that do not overlap with any of the simulated DMRs.]]
----
-
-
 
 
 class: left
