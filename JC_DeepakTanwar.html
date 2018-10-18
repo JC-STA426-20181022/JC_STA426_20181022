@@ -62,13 +62,71 @@ class: left
 
 
 ---
+class: left
+
+# .center[Epigenetics]
+
+A layer of **additional information over genetic information**.
+
+--
+
+.red[**Study of stable heritable changes in gene expression that occur without changes in DNA sequence.**]
+
+--
+
+.center[Epigenetics modification/ marks = Punctuation marks]
+
+--
+
+.center[`bioinformaticianarenotantisocialwearejustgenomefriendly`]
+
+--
+
+.center[.blue[**Bioinformaticians are not anti-social; we are just genome friendly.**]]
+
+--
+
+&lt;img src="pics/07_dmr.png" width="1000" height="130%"&gt;
+
+---
+
+
+class: center
+
+# Various Epigenetic Modifications
+
+
+&lt;img src="pics/06_dmr.png" width="1000" height="130%"&gt;
+
+---
+
+---
+
+
+class: center
+
+# WGBS
+
+.pull-left[
+### Bisulphite conversion
+&lt;img src="pics/08_dmr.png" width="1000" height="130%"&gt;
+[ref](https://www.epigentek.com/catalog/dna-bisulfite-conversion-c-75_21_47.html)
+]
+
+--
+
+.pull-right[
+### Basic Data analysis pipeline
+&lt;img src="pics/09_dmr.png" width="1000" height="130%"&gt;
+]
+
+---
 
 class: left
 
 # .center[Applications of WGBS]
 
-&lt;br&gt;
-
+.left-column[
 - Detection of DMRs
 
 - Detection of DMLs
@@ -78,7 +136,13 @@ class: left
 - Detection of SNPs
 
 - Detection of Cytosine methylation levels of TFBSs
+]
 
+--
+
+.right-column[
+&lt;img src="https://methgo.readthedocs.io/en/latest/_images/overview.svg" width="1000" height="130%"&gt;
+]
 ---
 
 class: left
@@ -165,16 +229,16 @@ The individual CpGs (points) are shaded by whether they are a true or false posi
 
 # .center[Identification of DMRs by dmrseq]
 
-<div id="htmlwidget-e7191d7cd68906202dc1" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e7191d7cd68906202dc1">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c0179e5745c2b66af590" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c0179e5745c2b66af590">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
 # .center[Detecting candidate regions]
 
 .pull-left[
-<div id="htmlwidget-532a36879939b3f60841" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-532a36879939b3f60841">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\",\n  fillcolor=lightBlue2]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-3b620fabd9164913534c" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3b620fabd9164913534c">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\",\n  fillcolor=lightBlue2]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 
@@ -200,8 +264,8 @@ The individual CpGs (points) are shaded by whether they are a true or false posi
 # .center[Assessing significance of candidate DMRs]
 
 .pull-left[
-<div id="htmlwidget-978cba7f70b06156a0b2" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-978cba7f70b06156a0b2">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-dc957cf6da1400c971f5" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dc957cf6da1400c971f5">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -220,8 +284,8 @@ with `\(\beta_{1r}\)` being the effect of biological group
 # .center[Assessing significance of candidate DMRs]
 
 .pull-left[
-<div id="htmlwidget-2986425334803a3c1c48" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2986425334803a3c1c48">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-cd9751f07527f1bdb870" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cd9751f07527f1bdb870">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -239,8 +303,8 @@ with `\(\beta_{1r}\)` being the effect of biological group
 # .center[Estimating FDR]
 
 .pull-left[
-<div id="htmlwidget-34f31be17677ff7f9981" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-34f31be17677ff7f9981">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\", fillcolor=lightBlue2]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-643b7e7a290190c9a141" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-643b7e7a290190c9a141">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\", fillcolor=lightBlue2]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -273,7 +337,7 @@ with `\(\beta_{1r}\)` being the effect of biological group
 
 ---
 
-# .center[dmrseq is more powerful than other methods]
+# .center[dmrseq is more powerful]
 
 .center[power vs. FDR on simulated data]
 
@@ -331,11 +395,11 @@ class: left
 
 # References
 
-[1] Smith Z. D. and Meissner A. (2013). DNA methylation: roles in mammalian development. Nature Reviews Genetics  14, 204â220.
+[1] Smith Z. D. and Meissner A. (2013). DNA methylation: roles in mammalian development. Nature Reviews Genetics  14, 204–220.
 
-[2] Leek J. T., Scharpf R. B., Bravo H. C., Simcha D., Langmead B., Johnson W. E., Geman D., Baggerly K. and Irizarry R. A. (2010). Tackling the widespread and critical impact of batch effects in high-throughput data. Nature Reviews Genetics  11, 733â739.
+[2] Leek J. T., Scharpf R. B., Bravo H. C., Simcha D., Langmead B., Johnson W. E., Geman D., Baggerly K. and Irizarry R. A. (2010). Tackling the widespread and critical impact of batch effects in high-throughput data. Nature Reviews Genetics  11, 733–739.
 
-[3] Aryee M. J., Jaffe A. E., Corrada-Bravo H., Ladd-Acosta C., Feinberg A. P., Hansen K. D. and Irizarry R. A. (2014). Minfi: a flexible and comprehensive Bioconductor package for the analysis of infinium DNA methylation microarrays. Bioinformatics  30, 1363â1369.
+[3] Aryee M. J., Jaffe A. E., Corrada-Bravo H., Ladd-Acosta C., Feinberg A. P., Hansen K. D. and Irizarry R. A. (2014). Minfi: a flexible and comprehensive Bioconductor package for the analysis of infinium DNA methylation microarrays. Bioinformatics  30, 1363–1369.
 
 [4] Robinson M. D., Kahraman A., Law C. W., Lindsay H., Nowicka M., Weber L. M. and Zhou X. (2014). Statistical methods for detecting differentially methylated loci and regions. Frontiers in Genetics  5, 324.
 
@@ -435,7 +499,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
 (function () {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
   if (location.protocol !== 'file:' && /^https?:/.test(script.src))
     script.src  = script.src.replace(/^https?:/, '');
   document.getElementsByTagName('head')[0].appendChild(script);

@@ -53,13 +53,71 @@ class: left
 
 
 ---
+class: left
+
+# .center[Epigenetics]
+
+A layer of **additional information over genetic information**.
+
+--
+
+.red[**Study of stable heritable changes in gene expression that occur without changes in DNA sequence.**]
+
+--
+
+.center[Epigenetics modification/ marks = Punctuation marks]
+
+--
+
+.center[`bioinformaticianarenotantisocialwearejustgenomefriendly`]
+
+--
+
+.center[.blue[**Bioinformaticians are not anti-social; we are just genome friendly.**]]
+
+--
+
+<img src="pics/07_dmr.png" width="1000" height="130%">
+
+---
+
+
+class: center
+
+# Various Epigenetic Modifications
+
+
+<img src="pics/06_dmr.png" width="1000" height="130%">
+
+---
+
+---
+
+
+class: center
+
+# WGBS
+
+.pull-left[
+### Bisulphite conversion
+<img src="pics/08_dmr.png" width="1000" height="130%">
+[ref](https://www.epigentek.com/catalog/dna-bisulfite-conversion-c-75_21_47.html)
+]
+
+--
+
+.pull-right[
+### Basic Data analysis pipeline
+<img src="pics/09_dmr.png" width="1000" height="130%">
+]
+
+---
 
 class: left
 
 # .center[Applications of WGBS]
 
-<br>
-
+.left-column[
 - Detection of DMRs
 
 - Detection of DMLs
@@ -69,7 +127,13 @@ class: left
 - Detection of SNPs
 
 - Detection of Cytosine methylation levels of TFBSs
+]
 
+--
+
+.right-column[
+<img src="https://methgo.readthedocs.io/en/latest/_images/overview.svg" width="1000" height="130%">
+]
 ---
 
 class: left
@@ -354,7 +418,7 @@ A->B B->C}
 
 ---
 
-# .center[dmrseq is more powerful than other methods]
+# .center[dmrseq is more powerful]
 
 .center[power vs. FDR on simulated data]
 
