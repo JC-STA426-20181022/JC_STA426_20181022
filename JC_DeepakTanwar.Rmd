@@ -22,18 +22,21 @@ options(htmltools.dir.version = FALSE)
 
 .large[
 [dmrseq paper](#3)
+
 <br>
+[Epigenetics](#4)
+
 <br>
-[Applications of WGBS](#4)
+[Whole Genome Bisulphite Sequencing](#11)
+
 <br>
+[Limitations of current methods](#15)
+
 <br>
-[Methods limitation](#5)
+[dmrseq](#24)
+
 <br>
-<br>
-[dmrseq](#8)
-<br>
-<br>
-[Venn diagrams](#15)
+[Comparison: dmrseq vs other methods](#33)
 ]
 ---
 
@@ -91,12 +94,10 @@ class: center
 
 ---
 
----
-
 
 class: center
 
-# WGBS
+# Whole Genome Bisulphite Sequencing (WGBS)
 
 .pull-left[
 ### Bisulphite conversion
@@ -111,27 +112,30 @@ class: center
 <img src="pics/09_dmr.png" width="1000" height="130%">
 ]
 
+.red[Compared to methods developed for RNA-Seq, there are not that many statistical methods available for studying WGBS]
+
 ---
 
 class: left
 
 # .center[Applications of WGBS]
 
-.left-column[
-- Detection of DMRs
+<br>
 
-- Detection of DMLs
+- Detection of Differentially Methylated Regions (**DMRs**)
 
-- Detection of CNVs
+- Detection of Differentially Methylated Loci (**DMLs**)
 
-- Detection of SNPs
+- Detection of Copy Number Variations (CNVs)
 
-- Detection of Cytosine methylation levels of TFBSs
-]
+- Detection of Single Nucleotide Polymorphisms (SNPs)
 
---
+- Detection of Cytosine methylation levels of Transcription Factor Binding Sites (TFBSs)
+---
 
-.right-column[
+# .right[....cont]
+
+
 <img src="https://methgo.readthedocs.io/en/latest/_images/overview.svg" width="1000" height="130%">
 ]
 ---
@@ -139,6 +143,8 @@ class: left
 class: left
 
 # .center[Limitations of current methods]
+
+<br>
 
 - Methods are greatly hindered by low sample size. Most of the methods depend on large sample sizes.
 
@@ -162,6 +168,7 @@ class: left
 
 ##.right[....cont.]
 
+<br>
 - DML approaches may construct DMRs by chaining together neighboring significant loci, but this type of approach will not yield a proper assessment of the statistical significance of the constructed regions, nor will the FDR be properly controlled [4]. Controlling the FDR at the level of individual loci is not the same as controlling FDR of regions.
 
 --
@@ -282,10 +289,6 @@ A->B B->C}
 
 - candidate regions: segments of genomes with smoothed $\beta_i$'s in the same direction and in absolute value greater than a threshold (e.g. 0.1)
 ]
-
-
-
---- 
 
 ---
 
@@ -438,6 +441,19 @@ FDR is calculated as the proportion of DMRs identified that do not overlap with 
 <img src="pics/02_dmr.png" width="500" height="50%">
 ]
 
+
+---
+
+class: left
+
+# .center[dmrseq availability]
+
+
+<br>
+
+- GitHub: [kdkorthauer/dmrseq](https://github.com/kdkorthauer/dmrseq)
+
+- Bioconductor: [dmrseq](https://bioconductor.org/packages/release/bioc/html/dmrseq.html)
 
 ---
 
