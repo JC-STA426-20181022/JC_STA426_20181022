@@ -281,7 +281,7 @@ A->B B->C}
 - mean methylation proportion for locus $i$ in condition $s$: $$\pi_{is} = M_{is}/N_{is}$$
 
 
-- methylation difference of locus $i$ between regions $s$ and $s'$: $$\beta_i = \pi_{is} - \pi_{is'}$$ 
+- methylation difference of locus $i$ between biological conditions $s$ and $s'$: $$\beta_i = \pi_{is} - \pi_{is'}$$ 
 
 
 - $\beta_i$'s are smoothed
