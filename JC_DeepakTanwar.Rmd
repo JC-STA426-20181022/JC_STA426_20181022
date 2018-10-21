@@ -72,7 +72,7 @@ A layer of **additional information over genetic information**.
 
 --
 
-.center[`bioinformaticianarenotantisocialwearejustgenomefriendly`]
+.center[`bioinformaticiansarenotantisocialwearejustgenomefriendly`]
 
 --
 
@@ -80,7 +80,41 @@ A layer of **additional information over genetic information**.
 
 --
 
-<img src="pics/07_dmr.png" width="1000" height="130%">
+.center[`execute not let free`]
+
+--
+
+.center[.blue[**Execute, not let free!**]]
+
+---
+
+class: left
+
+# .center[Epigenetics]
+
+A layer of **additional information over genetic information**.
+
+
+.red[**Study of stable heritable changes in gene expression that occur without changes in DNA sequence.**]
+
+
+.center[Epigenetics modification/ marks = Punctuation marks]
+
+
+.center[`bioinformaticiansarenotantisocialwearejustgenomefriendly`]
+
+
+.center[.blue[**Bioinformaticians are not anti-social; we are just genome friendly.**]]
+
+
+.center[`execute not let free`]
+
+
+.center[.blue[**Execute not, let free!**]]
+
+--
+
+.center[<img src="pics/07_dmr.png" width="600" height="100%">]
 
 ---
 
