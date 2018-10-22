@@ -3,7 +3,7 @@
   <head>
     <title>Journal Club</title>
     <meta charset="utf-8">
-    <meta name="author" content="Deepak Tanwar, Hana Parizkova" />
+    <meta name="author" content="Deepak Tanwar, Hana Parizkova    @JC-STA426-20181022" />
     <link href="sta426_files/remark-css/default.css" rel="stylesheet" />
     <link href="sta426_files/remark-css/default-fonts.css" rel="stylesheet" />
     <script src="sta426_files/htmlwidgets/htmlwidgets.js"></script>
@@ -17,7 +17,7 @@
 class: center, middle, inverse, title-slide
 
 # Journal Club
-### Deepak Tanwar, Hana Parizkova
+### Deepak Tanwar, Hana Parizkova <br><br> <span class="citation">@JC-STA426-20181022</span>
 ### 22 <sup>th</sup> October, 2018
 
 ---
@@ -26,11 +26,27 @@ class: center, middle, inverse, title-slide
 
 
 
+class: left
+
+&lt;br&gt;
+&lt;br&gt;
+
+# Detection and accurate false discovery rate control of differentially methylated regions from whole genome bisulfite sequencing
+
+.blue[Keegan Korthauer, Sutirtha Chakraborty, Yuval Benjamini,] .red[Rafael A Irizarry]
+
+
+&lt;i&gt;Biostatistics&lt;/i&gt;, kxy007, https://doi.org/10.1093/biostatistics/kxy007
+
+&lt;b&gt;Published:&lt;/b&gt; 22 February 2018
+
+
+---
 
 # Table of Contents
 
 .large[
-[dmrseq paper](#3)
+[dmrseq paper](#2)
 
 &lt;br&gt;
 [Epigenetics](#4)
@@ -49,22 +65,6 @@ class: center, middle, inverse, title-slide
 ]
 ---
 
-class: left
-
-&lt;br&gt;
-&lt;br&gt;
-
-# Detection and accurate false discovery rate control of differentially methylated regions from whole genome bisulfite sequencing
-
-.blue[Keegan Korthauer, Sutirtha Chakraborty, Yuval Benjamini,] .red[Rafael A Irizarry]
-
-
-&lt;i&gt;Biostatistics&lt;/i&gt;, kxy007, https://doi.org/10.1093/biostatistics/kxy007
-
-&lt;b&gt;Published:&lt;/b&gt; 22 February 2018
-
-
----
 class: left
 
 # .center[Epigenetics]
@@ -270,16 +270,16 @@ The individual CpGs (points) are shaded by whether they are a true or false posi
 
 # .center[Identification of DMRs by dmrseq]
 
-<div id="htmlwidget-04024579ed67423115dc" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-04024579ed67423115dc">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-082ef8689f72cdeea9d6" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-082ef8689f72cdeea9d6">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
 # .center[Detecting candidate regions]
 
 .pull-left[
-<div id="htmlwidget-19134a376cbb5ae760d2" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-19134a376cbb5ae760d2">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\",\n  fillcolor=lightBlue2]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5816924a0acfb0d2d151" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5816924a0acfb0d2d151">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\",\n  fillcolor=lightBlue2]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 
@@ -301,8 +301,8 @@ The individual CpGs (points) are shaded by whether they are a true or false posi
 # .center[Assessing significance of candidate DMRs]
 
 .pull-left[
-<div id="htmlwidget-83224b2946a502a82627" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-83224b2946a502a82627">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-095d47b0871cc6373a6e" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-095d47b0871cc6373a6e">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -321,8 +321,8 @@ with `\(\beta_{1r}\)` being the effect of biological group
 # .center[Assessing significance of candidate DMRs]
 
 .pull-left[
-<div id="htmlwidget-f34743f2afcdc4a8d029" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f34743f2afcdc4a8d029">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6af1ed5cd3f78fda854c" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6af1ed5cd3f78fda854c">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -340,8 +340,8 @@ with `\(\beta_{1r}\)` being the effect of biological group
 # .center[Estimating FDR]
 
 .pull-left[
-<div id="htmlwidget-15d2131a9ed611e02fd4" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-15d2131a9ed611e02fd4">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\", fillcolor=lightBlue2]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f09c8a49634e47110db5" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f09c8a49634e47110db5">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\", fillcolor=lightBlue2]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -465,6 +465,8 @@ class: center
 &lt;br&gt;
 
 .eLarge[**Thank you!**]
+
+Slides are prepared using [xaringan](https://github.com/yihui/xaringan) R package
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

@@ -1,6 +1,6 @@
 ---
 title: "Journal Club"
-author: "Deepak Tanwar, Hana Parizkova <br><br> @JC-STA426-20181022"
+author: "Deepak Tanwar (@dktanwar), Hana Parizkova (@parizkh) <br><br> Contrbutions: @JC-STA426-20181022"
 date: "22 <sup>th</sup> October, 2018"
 output: 
   xaringan::moon_reader:
