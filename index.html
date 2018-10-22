@@ -4,12 +4,12 @@
     <title>Journal Club</title>
     <meta charset="utf-8">
     <meta name="author" content="Deepak Tanwar, Hana Parizkova" />
-    <link href="index_files/remark-css/default.css" rel="stylesheet" />
-    <link href="index_files/remark-css/default-fonts.css" rel="stylesheet" />
-    <script src="index_files/htmlwidgets/htmlwidgets.js"></script>
-    <script src="index_files/viz/viz.js"></script>
-    <link href="index_files/DiagrammeR-styles/styles.css" rel="stylesheet" />
-    <script src="index_files/grViz-binding/grViz.js"></script>
+    <link href="sta426_files/remark-css/default.css" rel="stylesheet" />
+    <link href="sta426_files/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="sta426_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="sta426_files/viz/viz.js"></script>
+    <link href="sta426_files/DiagrammeR-styles/styles.css" rel="stylesheet" />
+    <script src="sta426_files/grViz-binding/grViz.js"></script>
     <link rel="stylesheet" href="new.css" type="text/css" />
   </head>
   <body>
@@ -270,16 +270,16 @@ The individual CpGs (points) are shaded by whether they are a true or false posi
 
 # .center[Identification of DMRs by dmrseq]
 
-<div id="htmlwidget-a80f342701bc70c014c1" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a80f342701bc70c014c1">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-04024579ed67423115dc" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-04024579ed67423115dc">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
 # .center[Detecting candidate regions]
 
 .pull-left[
-<div id="htmlwidget-1608764fa8f381edeae2" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-1608764fa8f381edeae2">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\",\n  fillcolor=lightBlue2]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-19134a376cbb5ae760d2" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-19134a376cbb5ae760d2">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\",\n  fillcolor=lightBlue2]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 
@@ -301,8 +301,8 @@ The individual CpGs (points) are shaded by whether they are a true or false posi
 # .center[Assessing significance of candidate DMRs]
 
 .pull-left[
-<div id="htmlwidget-7cac60d65ae0d428cb62" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7cac60d65ae0d428cb62">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-83224b2946a502a82627" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-83224b2946a502a82627">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -321,8 +321,8 @@ with `\(\beta_{1r}\)` being the effect of biological group
 # .center[Assessing significance of candidate DMRs]
 
 .pull-left[
-<div id="htmlwidget-e7232c743c2f6e7fe1c4" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e7232c743c2f6e7fe1c4">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f34743f2afcdc4a8d029" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f34743f2afcdc4a8d029">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
@@ -340,8 +340,8 @@ with `\(\beta_{1r}\)` being the effect of biological group
 # .center[Estimating FDR]
 
 .pull-left[
-<div id="htmlwidget-f27b7ffd7cdebe8359b4" style="width:336px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f27b7ffd7cdebe8359b4">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\", fillcolor=lightBlue2]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-15d2131a9ed611e02fd4" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-15d2131a9ed611e02fd4">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\", fillcolor=lightBlue2]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
 
 .pull-right[
