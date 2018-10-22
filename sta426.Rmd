@@ -1,6 +1,6 @@
 ---
 title: "Journal Club"
-author: "Deepak Tanwar, Hana Parizkova"
+author: "Deepak Tanwar, Hana Parizkova <br><br> @JC-STA426-20181022"
 date: "22 <sup>th</sup> October, 2018"
 output: 
   xaringan::moon_reader:
@@ -17,11 +17,27 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 
+class: left
+
+<br>
+<br>
+
+# Detection and accurate false discovery rate control of differentially methylated regions from whole genome bisulfite sequencing
+
+.blue[Keegan Korthauer, Sutirtha Chakraborty, Yuval Benjamini,] .red[Rafael A Irizarry]
+
+
+<i>Biostatistics</i>, kxy007, https://doi.org/10.1093/biostatistics/kxy007
+
+<b>Published:</b> 22 February 2018
+
+
+---
 
 # Table of Contents
 
 .large[
-[dmrseq paper](#3)
+[dmrseq paper](#2)
 
 <br>
 [Epigenetics](#4)
@@ -40,22 +56,6 @@ options(htmltools.dir.version = FALSE)
 ]
 ---
 
-class: left
-
-<br>
-<br>
-
-# Detection and accurate false discovery rate control of differentially methylated regions from whole genome bisulfite sequencing
-
-.blue[Keegan Korthauer, Sutirtha Chakraborty, Yuval Benjamini,] .red[Rafael A Irizarry]
-
-
-<i>Biostatistics</i>, kxy007, https://doi.org/10.1093/biostatistics/kxy007
-
-<b>Published:</b> 22 February 2018
-
-
----
 class: left
 
 # .center[Epigenetics]
@@ -546,3 +546,5 @@ class: center
 <br>
 
 .eLarge[**Thank you!**]
+
+Slides are prepared using [xaringan](https://github.com/yihui/xaringan) R package

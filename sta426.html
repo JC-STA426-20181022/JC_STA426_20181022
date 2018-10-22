@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Journal Club</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Deepak Tanwar, Hana Parizkova    @JC-STA426-20181022" />
+    <link href="sta426_files/remark-css/default.css" rel="stylesheet" />
+    <link href="sta426_files/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="sta426_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="sta426_files/viz/viz.js"></script>
+    <link href="sta426_files/DiagrammeR-styles/styles.css" rel="stylesheet" />
+    <script src="sta426_files/grViz-binding/grViz.js"></script>
+    <link rel="stylesheet" href="new.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Journal Club
+### Deepak Tanwar, Hana Parizkova <br><br> <span class="citation">@JC-STA426-20181022</span>
+### 22 <sup>th</sup> October, 2018
+
+---
+
+
+
+
+
+class: left
+
+&lt;br&gt;
+&lt;br&gt;
+
+# Detection and accurate false discovery rate control of differentially methylated regions from whole genome bisulfite sequencing
+
+.blue[Keegan Korthauer, Sutirtha Chakraborty, Yuval Benjamini,] .red[Rafael A Irizarry]
+
+
+&lt;i&gt;Biostatistics&lt;/i&gt;, kxy007, https://doi.org/10.1093/biostatistics/kxy007
+
+&lt;b&gt;Published:&lt;/b&gt; 22 February 2018
+
+
+---
+
+# Table of Contents
+
+.large[
+[dmrseq paper](#2)
+
+&lt;br&gt;
+[Epigenetics](#4)
+
+&lt;br&gt;
+[Whole Genome Bisulphite Sequencing](#11)
+
+&lt;br&gt;
+[Limitations of current methods](#15)
+
+&lt;br&gt;
+[dmrseq](#24)
+
+&lt;br&gt;
+[Comparison: dmrseq vs other methods](#33)
+]
+---
+
+class: left
+
+# .center[Epigenetics]
+
+A layer of **additional information over genetic information**.
+
+--
+
+.red[**Study of stable heritable changes in gene expression that occur without changes in DNA sequence.**]
+
+--
+
+.center[Epigenetics modification/ marks = Punctuation marks]
+
+--
+
+.center[`bioinformaticiansarenotantisocialwearejustgenomefriendly`]
+
+--
+
+.center[.blue[**Bioinformaticians are not anti-social; we are just genome friendly.**]]
+
+--
+
+.center[`execute not let free`]
+
+--
+
+.center[.blue[**Execute, not let free!**]]
+
+---
+
+class: left
+
+# .center[Epigenetics]
+
+A layer of **additional information over genetic information**.
+
+
+.red[**Study of stable heritable changes in gene expression that occur without changes in DNA sequence.**]
+
+
+.center[Epigenetics modification/ marks = Punctuation marks]
+
+
+.center[`bioinformaticiansarenotantisocialwearejustgenomefriendly`]
+
+
+.center[.blue[**Bioinformaticians are not anti-social; we are just genome friendly.**]]
+
+
+.center[`execute not let free`]
+
+
+.center[.blue[**Execute not, let free!**]]
+
+--
+
+.center[&lt;img src="pics/07_dmr.png" width="600" height="100%"&gt;]
+
+---
+
+
+class: center
+
+# Various Epigenetic Modifications
+
+
+&lt;img src="pics/06_dmr.png" width="1000" height="130%"&gt;
+
+---
+
+
+class: center
+
+# Whole Genome Bisulphite Sequencing (WGBS)
+
+.pull-left[
+### Bisulphite conversion
+&lt;img src="pics/08_dmr.png" width="1000" height="130%"&gt;
+[ref](https://www.epigentek.com/catalog/dna-bisulfite-conversion-c-75_21_47.html)
+]
+
+--
+
+.pull-right[
+### Basic Data analysis pipeline
+&lt;img src="pics/09_dmr.png" width="1000" height="130%"&gt;
+]
+
+.red[Compared to methods developed for RNA-Seq, there are not that many statistical methods available for studying WGBS]
+
+---
+
+class: left
+
+# .center[Applications of WGBS]
+
+&lt;br&gt;
+
+- Detection of Differentially Methylated Regions (**DMRs**)
+
+- Detection of Differentially Methylated Loci (**DMLs**)
+
+- Detection of Copy Number Variations (CNVs)
+
+- Detection of Single Nucleotide Polymorphisms (SNPs)
+
+- Detection of Cytosine methylation levels of Transcription Factor Binding Sites (TFBSs)
+---
+
+# .right[....cont]
+
+
+&lt;img src="https://methgo.readthedocs.io/en/latest/_images/overview.svg" width="1000" height="130%"&gt;
+]
+---
+
+class: left
+
+# .center[Limitations of current methods]
+
+&lt;br&gt;
+
+- Methods are greatly hindered by low sample size. Most of the methods depend on large sample sizes.
+
+--
+
+- The number of tests performed = the number of loci analyzed.
+&lt;b&gt;Example:&lt;/b&gt; Human genome has ~30 million CpGs [1].
+
+--
+
+- Measurements are spatially correlated across the genome [2], but in most methods measurements from all loci are treated independently.
+
+--
+
+- Muliple testing corrections without considering the spatial correlation can result in a loss of power.
+
+--
+
+- DMRs more biologically relevant than DMLs.
+---
+
+##.right[....cont.]
+
+&lt;br&gt;
+- DML approaches may construct DMRs by chaining together neighboring significant loci, but this type of approach will not yield a proper assessment of the statistical significance of the constructed regions, nor will the FDR be properly controlled [4]. Controlling the FDR at the level of individual loci is not the same as controlling FDR of regions.
+
+--
+
+- Methylation data cannot be modeled neither by Gaussian models (due to low coverage), nor by Binomial models (do not account for biological variability). Beta-Binomial models are computationaly difficult.
+
+--
+
+- Challenges for assessing DMRs:
+   - defining region boundaries
+   - methods ignore correlation across loci
+   - biological variability from sample to sample
+
+---
+
+# .center[FDR at the loci level is not the same as FDR at the region level]
+
+.pull-left[
+&lt;img src="pics/01_dmr.png" width="1000" height="130%"&gt;
+
+.content-box-blue[
+&lt;b&gt;Genomic location versus methylation difference estimates at several neighboring loci.&lt;/b&gt;
+]
+]
+
+
+.pull-right[
+.content-box-blue[
+The individual CpGs (points) are shaded by whether they are a true or false positive. Regions are denoted by lines. 
+
+&lt;b&gt;The loci FDR is:&lt;/b&gt;
+
+ .red[FDRloci = (#False Positive Loci) / (Total # of Significant Loci)]
+ 
+&lt;b&gt;The region FDR is:&lt;/b&gt;
+
+.red[FDRregion=(#False Positive Regions) / (Total # of Significant Regions)]
+]
+]
+
+---
+
+
+# .center[dmrseq] .right[&lt;img src="https://raw.githubusercontent.com/kdkorthauer/dmrseq/master/inst/sticker/dmrseq.png" width="100" height="100%"&gt;] 
+
+.large[.full-width[.content-box-red[&lt;b&gt;Aim:&lt;/b&gt; 
+
+1. To &lt;b&gt;maximize power&lt;/b&gt; while &lt;b&gt;controlling the FDR&lt;/b&gt; even with sample sizes as small as &lt;b&gt;two samples per condition&lt;/b&gt;.
+
+
+2. To develop a procedure to control FDR at the region level and provide an accurate measure of statistical significance for each region.
+
+]]]
+
+---
+
+# .center[Identification of DMRs by dmrseq]
+
+<div id="htmlwidget-082ef8689f72cdeea9d6" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-082ef8689f72cdeea9d6">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# .center[Detecting candidate regions]
+
+.pull-left[
+<div id="htmlwidget-5816924a0acfb0d2d151" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5816924a0acfb0d2d151">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\",\n  fillcolor=lightBlue2]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+]
+
+
+.pull-right[
+- mean methylation proportion for locus `\(i\)` in condition `\(s\)`: `$$\pi_{is} = M_{is}/N_{is}$$`
+
+
+- methylation difference of locus `\(i\)` between biological conditions `\(s\)` and `\(s'\)`: `$$\beta_i = \pi_{is} - \pi_{is'}$$` 
+
+
+- `\(\beta_i\)`'s are smoothed
+
+
+- candidate regions: segments of genomes with smoothed `\(\beta_i\)`'s in the same direction and in absolute value greater than a threshold (e.g. 0.1)
+]
+
+---
+
+# .center[Assessing significance of candidate DMRs]
+
+.pull-left[
+<div id="htmlwidget-095d47b0871cc6373a6e" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-095d47b0871cc6373a6e">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+- methylation counts modeled by Beta-Binomial distribution
+
+- to stabilize the dependence of variance on mean, data are transformed: `$$Z_{ijr} =\arcsin{(2M_{ijr}/N_{ijr}-1)}$$`
+
+- mean region methylation level can be then estimated using Generalized Least Squares: `$$Z_r = X\beta_{0r} + \beta_{1r},$$`
+with `\(\beta_{1r}\)` being the effect of biological group
+
+]
+
+
+---
+
+# .center[Assessing significance of candidate DMRs]
+
+.pull-left[
+<div id="htmlwidget-6af1ed5cd3f78fda854c" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6af1ed5cd3f78fda854c">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\",\n  fillcolor=lightBlue2]\nC [label=\"Estimate FDR\"]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+- Estimation of covariance matrix `\(V_r\)`:
+
+  - variance dependent on coverage `\(\rightarrow Var(Z_{ijr}) \approx \sigma^2_r/N_{ijr}\)`
+  
+  - correlation of nearby loci `\(\rightarrow\)` modeled correlation by coefficients dependent of the lenght of the interval between the two loci
+
+]
+
+
+---
+
+# .center[Estimating FDR]
+
+.pull-left[
+<div id="htmlwidget-f09c8a49634e47110db5" style="width:336px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f09c8a49634e47110db5">{"x":{"diagram":"\ndigraph flowchart {\ngraph [overlap = true, layout=dot,fontsize=12]\nnode [shape = box,\n  style=filled,\n  fillcolor=AliceBlue,\n  color=lightBlue2,\n  fontsize=12]\n A [label=\"Detect candidate regions\"]\nB [label=\"Assessing significance \n of each candidate DMR\"]\nC [label=\"Estimate FDR\", fillcolor=lightBlue2]\n\nedge[color=lightBlue2,\n  penwidth=5\n]\nA->B B->C}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+]
+
+.pull-right[
+- permutation to get an approximate null distribution
+
+- p-value computed by comparing the observed test statistics to the null distribution
+
+]
+
+
+---
+
+# .center[Data used for comparison]
+
+
+- six samples of normal human dendritic cells, partitioned into groups of two or three `\(\rightarrow\)` no DMRs, &lt;b&gt;negative control&lt;/b&gt;
+
+--
+
+
+- &lt;b&gt;simulated data:&lt;/b&gt; 3000 simulated DMRs added to each data set
+
+  - DMR is created by choosing a cluster of CpGs and simulating the number of methylated reads from a binomial distribution
+  - binomial probabilities equal to the observed methylation proportions `\(\pm\)` effect size (approx. 0.1 to 0.5)
+ 
+--
+
+- &lt;b&gt;real data:&lt;/b&gt; methylation data from several human tissues and from two mouse strains
+
+
+---
+
+# .center[dmrseq is more powerful]
+
+.center[power vs. FDR on simulated data]
+
+.center[
+&lt;img src="pics/03_dmr.png" width="800" height="100%"&gt;
+]
+
+.footnotesize[.blue[Power is calculated as the proportion of simulated DMRs overlapped by at least one identified DMR. 
+FDR is calculated as the proportion of DMRs identified that do not overlap with any of the simulated DMRs.]]
+---
+
+# .center[dmrseq performs better]
+
+.center[Examples of real biological data and their ranking by different DMRs identification methods.]
+
+.center[
+&lt;img src="pics/02_dmr.png" width="500" height="50%"&gt;
+]
+
+
+---
+
+class: left
+
+# .center[dmrseq availability]
+
+
+&lt;br&gt;
+
+- GitHub: [kdkorthauer/dmrseq](https://github.com/kdkorthauer/dmrseq)
+
+- Bioconductor: [dmrseq](https://bioconductor.org/packages/release/bioc/html/dmrseq.html)
+
+---
+
+
+class: left
+
+# Summary
+
+
+- Powerful even in the case of 2 samples per group.
+
+--
+
+- Consideration of all possible shorcomings of the available methods for DMRs detection.
+
+--
+
+- Evaluation of the software using experimental data and Monte Carlo simulations.
+
+--
+
+- Implementation in &lt;b&gt;R&lt;/b&gt;.
+
+--
+
+- Comparison of the new method with the "famous" methods.
+
+--
+
+- Comparison is not done with &lt;b&gt;RnBeads&lt;/b&gt;. Probably because RnBeads performs differential methylation analysis (only) at single nucleotide level.
+
+
+- Comparison is not done with &lt;b&gt;methylKit&lt;/b&gt;, although methylKit performs differential methylation analysis at regional level.
+
+---
+
+# References
+
+[1] Smith Z. D. and Meissner A. (2013). DNA methylation: roles in mammalian development. Nature Reviews Genetics  14, 204–220.
+
+[2] Leek J. T., Scharpf R. B., Bravo H. C., Simcha D., Langmead B., Johnson W. E., Geman D., Baggerly K. and Irizarry R. A. (2010). Tackling the widespread and critical impact of batch effects in high-throughput data. Nature Reviews Genetics  11, 733–739.
+
+[3] Aryee M. J., Jaffe A. E., Corrada-Bravo H., Ladd-Acosta C., Feinberg A. P., Hansen K. D. and Irizarry R. A. (2014). Minfi: a flexible and comprehensive Bioconductor package for the analysis of infinium DNA methylation microarrays. Bioinformatics  30, 1363–1369.
+
+[4] Robinson M. D., Kahraman A., Law C. W., Lindsay H., Nowicka M., Weber L. M. and Zhou X. (2014). Statistical methods for detecting differentially methylated loci and regions. Frontiers in Genetics  5, 324.
+
+
+
+---
+
+class: center
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+.eLarge[**Thank you!**]
+
+Slides are prepared using [xaringan](https://github.com/yihui/xaringan) R package
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();
+(function(time) {
+  var d2 = function(number) {
+    return ('0' + number).slice(-2); // left-pad 0 to minutes/seconds
+  },
+
+  time_format = function(total) {
+    var secs = Math.abs(total) / 1000;
+    var h = Math.floor(secs / 3600);
+    var m = Math.floor(secs % 3600 / 60);
+    var s = Math.round(secs % 60);
+    var res = d2(m) + ':' + d2(s);
+    if (h > 0) res = h + ':' + res;
+    return res;  // [hh:]mm:ss
+  },
+
+  slide_number_div = function(i) {
+    return document.getElementsByClassName('remark-slide-number').item(i);
+  },
+
+  current_page_number = function(i) {
+    return slide_number_div(i).firstChild.textContent;  // text "i / N"
+  };
+
+  var timer = document.createElement('span'); timer.id = 'slide-time-left';
+  var time_left = time, k = slideshow.getCurrentSlideIndex(),
+      last_page_number = current_page_number(k);
+
+  setInterval(function() {
+    time_left = time_left - 1000;
+    timer.innerHTML = ' ' + time_format(time_left);
+    if (time_left < 0) timer.style.color = 'red';
+  }, 1000);
+
+  slide_number_div(k).appendChild(timer);
+
+  slideshow.on('showSlide', function(slide) {
+    var i = slide.getSlideIndex(), n = current_page_number(i);
+    // reset timer when a new slide is shown and the page number is changed
+    if (last_page_number !== n) {
+      time_left = time; last_page_number = n;
+      timer.innerHTML = ' ' + time_format(time); timer.style.color = null;
+    }
+    slide_number_div(i).appendChild(timer);
+  });
+})(120000);</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
